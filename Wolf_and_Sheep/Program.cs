@@ -4,6 +4,9 @@ namespace Wolf_and_Sheep
 {
     class Program
     {
+        /// <summary>
+        /// Starts the game with the menu
+        /// </summary>    
         static void Main(string[] args)
         {
             //Variables
@@ -50,10 +53,12 @@ namespace Wolf_and_Sheep
                 {
                     Console.WriteLine("-----------------------------------");
                     Console.WriteLine("Wolf:");
-                    Console.WriteLine("As a wolf, you have to move to the other side of the board to win");
+                    Console.Write("As a wolf, you have to move to the other"); 
+                    Console.Write("side of the board to win");
                     Console.WriteLine("You can move in every direction");
                     Console.WriteLine("Sheep:");
-                    Console.WriteLine("As the sheep, you have to block every movement of the wolf to win");
+                    Console.Write("As the sheep, you have to block every");
+                    Console.Write("movement of the wolf to win");
                     Console.WriteLine("You can move only forward");
                     Console.WriteLine("-----------------------------------");
                 }
@@ -70,45 +75,49 @@ namespace Wolf_and_Sheep
             Console.WriteLine("Preparing board :");
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("Player 1, choose Wolf starting position");
-            Console.WriteLine("(A2, A4, A6 or A8)");
+            Console.WriteLine("(0,1; 0,3; 0,5 or 0,7)");
             wolfstartpos = Console.ReadLine();
             while(chosen_map != true)
             {
                 switch (wolfstartpos)
                 {
-                    case "A2":
+                    case "0,1":
                         map[0,1] = 1;
                         wolfpos[0] = 0;
                         wolfpos[1] = 1;
                         Console.WriteLine("----------------------------------");
-                        Console.WriteLine($"The wolf starts at 'A2' {wolfpos[0]},{wolfpos[1]}");
+                        Console.Write($"The wolf starts at {wolfpos[0]},");
+                        Console.WriteLine($"{wolfpos[1]}");
                         chosen_map = true;
                         break;
                     
-                    case "A4":
+                    case "0,3":
                         map[0,3] = 1;
                         wolfpos[0] = 0;
                         wolfpos[1] = 3;
                         Console.WriteLine("----------------------------------");
-                        Console.WriteLine($"The wolf starts at 'A4' {wolfpos[0]},{wolfpos[1]}");
+                        Console.Write($"The wolf starts at {wolfpos[0]},");
+                        Console.WriteLine($"{wolfpos[1]}");
                         chosen_map = true;
                         break;
                     
-                    case "A6":
+                    case "0,5":
                         map[0,5] = 1;
                         wolfpos[0] = 0;
                         wolfpos[1] = 5;
                         Console.WriteLine("----------------------------------");
-                        Console.WriteLine($"The wolf starts at 'A6' {wolfpos[0]},{wolfpos[1]}");
+                        Console.Write($"The wolf starts at {wolfpos[0]},");
+                        Console.WriteLine($"{wolfpos[1]}");
                         chosen_map = true;
                         break;
                     
-                    case "A8":
+                    case "0,7":
                         map[0,7] = 1;
                         wolfpos[0] = 0;
                         wolfpos[1] = 7;
                         Console.WriteLine("----------------------------------");
-                        Console.WriteLine($"The wolf starts at 'A8' {wolfpos[0]},{wolfpos[1]}");
+                        Console.Write($"The wolf starts at {wolfpos[0]},");
+                        Console.WriteLine($"{wolfpos[1]}");
                         chosen_map = true;
                         break;
                     
@@ -139,6 +148,7 @@ namespace Wolf_and_Sheep
             sheep4pos[0] = 7;
             sheep4pos[1] = 6;
 
+            //Starts the game with the Wolf
             while (true)
             {
                 Console.WriteLine("-----------------------------------");
@@ -170,9 +180,11 @@ namespace Wolf_and_Sheep
                 Console.WriteLine("-----------------------------------");
                 Console.WriteLine("Player 2, it's your turn:");
                 Console.WriteLine("-----------------------------------");
-                ChoseSheep(ref sheep1pos, ref sheep2pos, ref sheep3pos, ref sheep4pos, ref map);
+                ChoseSheep(ref sheep1pos, ref sheep2pos, ref sheep3pos, 
+                ref sheep4pos, ref map);
 
-                if((sheep1pos[0] == -999) || (sheep2pos[0] == -999) || (sheep3pos[0] == -999) || (sheep4pos[0] == -999))
+                if((sheep1pos[0] == -999) || (sheep2pos[0] == -999) || 
+                (sheep3pos[0] == -999) || (sheep4pos[0] == -999))
                 {
                     Console.WriteLine("-----------------------------------");
                     Console.WriteLine("Quitting the game ...");
@@ -182,13 +194,15 @@ namespace Wolf_and_Sheep
 
             }
 
+            //Calls the board method to see the graphics everytime ther's a play
             Board(map);
             Console.WriteLine("Game Over");
 
         }
         
-        
-        //Method for Wolf movements
+        /// <summary>
+        /// Method for Wolf movements
+        /// </summary>
         static int [] WolfMovement(int [,] map, int [] pos)
         {
             //Variable to see if the sheep can move
@@ -205,7 +219,8 @@ namespace Wolf_and_Sheep
                 {
                     for(int y =-1; y<2; y++)
                     {
-                        if((pos[0]+x > -1) && (pos[0]+x < 8) && (pos[1]+y > -1) && (pos[1]+y < 8))
+                        if((pos[0]+x > -1) && (pos[0]+x < 8) && (pos[1]+y > -1) 
+                        && (pos[1]+y < 8))
                         {
                             if(y != 0)
                             {
@@ -250,8 +265,10 @@ namespace Wolf_and_Sheep
                 }
                 int futur_x =int.Parse(f_x);
                 int futur_y =int.Parse(f_y);
-                if ((futur_x > -1) && (futur_x < 8) && (futur_y > -1) && (futur_y < 8) && (map[futur_x,futur_y] == 3))
+                if ((futur_x > -1) && (futur_x < 8) && (futur_y > -1) && 
+                (futur_y < 8) && (map[futur_x,futur_y] == 3))
                 {
+                    //Actualize positions
                     map[pos[0], pos[1]] = 0;
                     pos[0] = futur_x;
                     pos[1] = futur_y;
@@ -270,9 +287,11 @@ namespace Wolf_and_Sheep
         }
         
         
-        
-        //Method to choose the Sheep that will move
-        static void ChoseSheep(ref int [] sheep1pos, ref int [] sheep2pos, ref int [] sheep3pos, ref int [] sheep4pos, ref int [,] map)
+        /// <summary>
+        /// Method to choose the Sheep that will move
+        /// </summary>
+        static void ChoseSheep(ref int [] sheep1pos, ref int [] sheep2pos, 
+        ref int [] sheep3pos, ref int [] sheep4pos, ref int [,] map)
         {
             //Variables 
             string sheepchosen;
@@ -321,7 +340,9 @@ namespace Wolf_and_Sheep
             }
         }
         
-        //Method for the Sheep movement
+        /// <summary>
+        /// Method for the Sheep movement
+        /// </summary>
         static int [] Sheepmovement(int [,] map, int [] pos)
         {
             //Variable to see if the sheep can move
@@ -332,11 +353,13 @@ namespace Wolf_and_Sheep
 
             for(int y =-1; y<2; y++)
             {
-                if((pos[0]-1 > -1) && (pos[0]-1 < 8) && (pos[1]+y > -1) && (pos[1]+y < 8))
+                if((pos[0]-1 > -1) && (pos[0]-1 < 8) && (pos[1]+y > -1) && 
+                (pos[1]+y < 8))
                 {
                     if(y != 0)
                     {
-                        if((map[pos[0]-1,pos[1]+y] != 2) && (map[pos[0]-1,pos[1]+y] != 1))
+                        if((map[pos[0]-1,pos[1]+y] != 2) && (map[pos[0]-1,
+                        pos[1]+y] != 1))
                         {
                             Console.WriteLine($"{pos[0]-1}, {pos[1]+y}");
                             map[pos[0]-1,pos[1]+y] = 3;
@@ -348,7 +371,8 @@ namespace Wolf_and_Sheep
 
             if (possible_mov == 0)
             {
-                Console.WriteLine("You can't move with this sheep, you lost your turn");
+                Console.Write("You can't move with this sheep, you lost");
+                Console.WriteLine("your turn");
                 return pos;
             }
 
@@ -377,8 +401,10 @@ namespace Wolf_and_Sheep
                     }
                     int futur_x =int.Parse(f_x);
                     int futur_y =int.Parse(f_y);
-                    if ((futur_x > -1) && (futur_x < 8) && (futur_y > -1) && (futur_y < 8) && (map[futur_x,futur_y] == 3))
+                    if ((futur_x > -1) && (futur_x < 8) && (futur_y > -1) && 
+                    (futur_y < 8) && (map[futur_x,futur_y] == 3))
                     {
+                        //Actualize positions
                         map[pos[0], pos[1]] = 0;
                         pos[0] = futur_x;
                         pos[1] = futur_y;
@@ -397,7 +423,10 @@ namespace Wolf_and_Sheep
             }
         }
 
-        //Draws the board
+        
+        /// <summary>
+        /// Draws the board
+        /// </summary>
         static void Board(int [,] map)
         {
             int count_down = 0;

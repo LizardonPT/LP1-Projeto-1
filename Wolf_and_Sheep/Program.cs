@@ -92,12 +92,13 @@ namespace Wolf_and_Sheep
         }
         
         
+        //Method for Wolf movements
         static int [] WolfMovement(int [,] map, int [] pos)
         {
-            //Diz aonde ele esta agora
-            Console.WriteLine($"O wolf esta em {pos[0]}, {pos[1]}");
+            //Wolf current position
+            Console.WriteLine($"Wolf is at {pos[0]}, {pos[1]}");
 
-            //Estas duas for vao dizer o caminho que ele pode fazer
+            //This 2 for tells the player every movement possible
             Console.WriteLine("Doable Movements :");
             for(int h=-1; h<2; h++)
             {
@@ -120,10 +121,10 @@ namespace Wolf_and_Sheep
                 }
             }
 
-            //Com as escolhas anteriores, ele vai poder se mexer
+            //With the preview choices the player must choose where to go
             Console.WriteLine("Choose your destination (x and then y) :");
 
-            //Vai perguntar isto ate ter uma boa resposta
+            //Asks for x and y coordinates to move
             while (true)
             {
             Console.Write("x = ");
@@ -140,17 +141,18 @@ namespace Wolf_and_Sheep
             }
             else
             {
-                Console.WriteLine("Nao pode ir para ai, tenta otra vez");
+                Console.WriteLine("You can't go there, try again");
             }
             }
 
-            Console.WriteLine($"Agora o Wolf esta em {pos[0]}, {pos[1]}");
+            Console.WriteLine($"The Wolf is now at {pos[0]}, {pos[1]}");
 
             return pos;
         }
         
         
         
+        //Method to choose the Sheep that will move
         static void ChoseSheep(ref int [] sheep1pos, ref int [] sheep2pos, ref int [] sheep3pos, ref int [] sheep4pos, ref int [,] map)
         {
             //Variables 
@@ -196,11 +198,13 @@ namespace Wolf_and_Sheep
                 }
             }
         }
+        
+        //Method for the Sheep movement
         static int [] Sheepmovement(int [,] map, int [] pos)
         {
             Console.WriteLine($"The Sheep is  {pos[0]}, {pos[1]}");
 
-            //Estas duas for vao dizer o caminho que ele pode fazer
+            //This for tells the player every movement possible
             Console.WriteLine("Doable Movements :");
 
             for(int g =-1; g<2; g++)
@@ -219,10 +223,10 @@ namespace Wolf_and_Sheep
             }
 
             
-            //Com as escolhas anteriores, ele vai poder se mexer
+            //With the preview choices the player must choose where to go
             Console.WriteLine("Choose your destination (x and then y) :");
 
-            //Vai perguntar isto ate ter uma boa resposta
+            //Asks for x and y coordinates to move
             while (true)
             {
             Console.Write("x = ");
@@ -239,11 +243,11 @@ namespace Wolf_and_Sheep
             }
             else
             {
-                Console.WriteLine("Nao pode ir para ai, tenta otra vez");
+                Console.WriteLine("You can't go there, try again");
             }
             }
 
-            Console.WriteLine($"Agora a Sheep esta em {pos[0]}, {pos[1]}");
+            Console.WriteLine($"Now this Sheep is at {pos[0]}, {pos[1]}");
 
             return pos;
         }
